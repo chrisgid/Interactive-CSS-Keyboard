@@ -1,0 +1,161 @@
+:root {
+    --background-color: #f0f0f0;
+    --border-color: #525252;
+    --text-color: #f0f0f0;
+
+    --key-border-color: #000000;
+    --key-height: 3rem;
+    --key-width: 3rem;
+    --key-border-width: 0.2rem;
+
+    --fn-keys-gap-below: 1em;
+}
+  
+@media (prefers-color-scheme: dark) {
+    :root {
+        /* Dark mode stuff here! */
+        --background-color: #242424;
+        --border-color: #444444;
+
+        --key-border-color: #868686;
+    }
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+main {
+    background-color: var(--background-color);
+    padding: 1rem;
+}
+
+.key {
+    text-align: center;
+    display: inline-block;
+    border-radius: 0.5rem;
+    border-style: solid;
+    border-width: var(--key-border-width);
+    border-color: var(--key-border-color);
+    height: var(--key-height);
+    width: var(--key-width);
+    box-sizing: border-box;
+}
+
+.key.key--1-25-wide {
+    width: calc(var(--key-width) * 1.25);
+}
+
+.key.key--1-5-wide {
+    width: calc(var(--key-width) * 1.5);
+}
+
+.key.key--1-75-wide {
+    width: calc(var(--key-width) * 1.75);
+}
+
+.key.key--2-wide {
+    width: calc(var(--key-width) * 2);
+}
+
+.key.key--2-25-wide {
+    width: calc(var(--key-width) * 2.25);
+}
+
+.key.key--2-75-wide {
+    width: calc(var(--key-width) * 2.75);
+}
+
+.key.key--6-25-wide {
+    width: calc(var(--key-width) * 6.25);
+}
+
+.keyboard {
+    width: 100%;
+    background-color: var(--background-color);
+    border-color: var(--border-color);
+    border-radius: 0.5rem;
+    border-style: solid;
+    border-width: 0.5rem;
+
+    display: grid;
+    grid-template-rows:
+        [fn-row] var(--key-height)
+        [main-row] calc(var(--key-height) * 5);
+    grid-template-columns: 
+        [main-column] calc(var(--key-width) * 15) /* 15 keys wide (13 + 1 double wide) */
+        [middle-column] calc(var(--key-width) * 3)
+        [numpad-column] calc(var(--key-width) * 4);
+    grid-column-gap: 1.5em;
+    grid-row-gap: var(--fn-keys-gap-below);
+}
+
+.fn-keys {
+    grid-row-start: fn-row;
+    grid-column-start: main-column;
+    display: grid;
+    grid-template-rows: var(--key-height);
+    grid-template-columns: 
+        [fn-esc-group] calc(var(--key-width) * 1)
+        [fn-f1-group] calc(var(--key-width) * 4)
+        [fn-f5-group] calc(var(--key-width) * 4)
+        [fn-f9-group] calc(var(--key-width) * 4);
+    grid-column-gap: calc(var(--key-width) * (2/3)); /* Gap between function key groups should be 2/3rds of a key's width */
+}
+
+.fn-keys .fn-esc-group {
+    grid-column-start: fn-esc-group;
+}
+
+.fn-keys .fn-f1-group {
+    grid-column-start: fn-f1-group;
+    display: flex;
+}
+
+.fn-keys .fn-f5-group {
+    grid-column-start: fn-f5-group;
+    display: flex;
+}
+
+.fn-keys .fn-f9-group {
+    grid-column-start: fn-f9-group;
+    display: flex;
+}
+
+.middle-col-keys {
+    grid-column-start: middle-column;
+    display: grid;
+    grid-template-rows: 
+        [control-keys] var(--key-height)
+        [control-nav-gap] var(--fn-keys-gap-below)
+        [nav-keys] var(--key-height)
+        [nav-arrow-gap] var(--key-height)
+        [arrow-keys] var(--key-height);
+}
+
+.middle-col-keys .control-keys {
+    grid-row-start: control-keys;
+    display: flex;
+}
+
+.middle-col-keys .nav-keys {
+    grid-row-start: nav-keys;
+    display: flex;
+}
+
+.middle-col-keys .arrow-keys {
+    grid-row-start: arrow-keys;
+    display: flex;
+}
+
+.main-keys {
+    grid-row-start: main-row;
+    display: grid;
+    grid-template-rows: repeat(5, var(--key-height));
+    grid-template-columns: calc(var(--key-width) * 15);
+}
+
+.main-keys-row {
+    display: flex;
+}
