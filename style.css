@@ -4,10 +4,12 @@
     --text-color: #f0f0f0;
 
     --key-border-color: #000000;
-    --key-height: 3rem;
-    --key-width: 3rem;
+    --key-text-color: #e3e3e3;
+    --key-height: 3.75rem;
+    --key-width: 3.75rem;
     --key-border-width: 0.2rem;
 
+    --middle-col-gap: 1.5em;
     --fn-keys-gap-below: 1em;
 }
   
@@ -17,7 +19,8 @@
         --background-color: #242424;
         --border-color: #444444;
 
-        --key-border-color: #868686;
+        --key-border-color: #1a1717;
+        --key-text-color: #e3e3e3;
     }
 }
 
@@ -33,14 +36,19 @@ main {
 
 .key {
     text-align: center;
-    display: inline-block;
-    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.6rem;
     border-style: solid;
     border-width: var(--key-border-width);
     border-color: var(--key-border-color);
     height: var(--key-height);
     width: var(--key-width);
     box-sizing: border-box;
+    font-family: 'Rubik', sans-serif;
+    box-shadow: inset 0px -3px 0px 3px rgb(255 255 255 / 10%);
+    color: #e3e3e3;
 }
 
 .key.key--1-25-wide {
@@ -71,8 +79,16 @@ main {
     width: calc(var(--key-width) * 6.25);
 }
 
+.key.key--2-tall {
+    height: calc(var(--key-height) * 2);
+}
+
+.keyboard-container {
+    display: flex;
+    justify-content: center;
+}
+
 .keyboard {
-    width: 100%;
     background-color: var(--background-color);
     border-color: var(--border-color);
     border-radius: 0.5rem;
@@ -81,18 +97,18 @@ main {
 
     display: grid;
     grid-template-rows:
-        [fn-row] var(--key-height)
+        [top-row] var(--key-height)
         [main-row] calc(var(--key-height) * 5);
     grid-template-columns: 
         [main-column] calc(var(--key-width) * 15) /* 15 keys wide (13 + 1 double wide) */
         [middle-column] calc(var(--key-width) * 3)
         [numpad-column] calc(var(--key-width) * 4);
-    grid-column-gap: 1.5em;
+    grid-column-gap: var(--middle-col-gap);
     grid-row-gap: var(--fn-keys-gap-below);
 }
 
 .fn-keys {
-    grid-row-start: fn-row;
+    grid-row-start: top-row;
     grid-column-start: main-column;
     display: grid;
     grid-template-rows: var(--key-height);
@@ -129,9 +145,10 @@ main {
     grid-template-rows: 
         [control-keys] var(--key-height)
         [control-nav-gap] var(--fn-keys-gap-below)
-        [nav-keys] var(--key-height)
+        [nav-keys] calc(var(--key-height) * 2)
         [nav-arrow-gap] var(--key-height)
-        [arrow-keys] var(--key-height);
+        [arrow-keys] calc(var(--key-height) * 2);
+    grid-template-columns: calc(var(--key-height) * 3);
 }
 
 .middle-col-keys .control-keys {
@@ -141,12 +158,19 @@ main {
 
 .middle-col-keys .nav-keys {
     grid-row-start: nav-keys;
-    display: flex;
+    display: grid;
+    grid-template-rows: repeat(2, var(--key-height));
+    grid-template-columns: calc(var(--key-width) * 3);
 }
 
 .middle-col-keys .arrow-keys {
     grid-row-start: arrow-keys;
-    display: flex;
+    display: grid;
+    grid-template-rows: repeat(2, var(--key-height));
+    grid-template-columns: 
+        var(--key-width)
+        [up-arrow-col] var(--key-width)
+        var(--key-width);
 }
 
 .main-keys {
@@ -156,6 +180,48 @@ main {
     grid-template-columns: calc(var(--key-width) * 15);
 }
 
-.main-keys-row {
+.keys-row {
     display: flex;
+}
+
+.up-arrow-row {
+    grid-column-start: up-arrow-col;
+}
+
+.down-arrow-row {
+    display: flex;
+    grid-row-start: 2;
+    grid-column: 1 / 4;
+}
+
+.numpad {
+    grid-column-start: numpad-column;
+    display: grid;
+    grid-template-rows: 
+        var(--key-height)
+        var(--fn-keys-gap-below)
+        [numpad__top] var(--key-height)
+        [numpad__main] calc(var(--key-height) * 4);
+    grid-template-columns: 
+        [numpad__main-col] calc(var(--key-height) * 3)
+        [numpad__side] var(--key-height);
+}
+
+.numpad .numpad__top {
+    grid-row-start: numpad__top;
+    grid-column: numpad__main-col / span 2;
+    display: flex;
+    width: 100%;
+}
+
+.numpad .numpad__main {
+    grid-row-start: numpad__main;
+    display: grid;
+    grid-template-rows: repeat(2, var(--key-height));
+    grid-template-columns: calc(var(--key-width) * 3);
+}
+
+.numpad .numpad__side {
+    grid-row-start: numpad__main;
+    grid-column-start: numpad__side;
 }
