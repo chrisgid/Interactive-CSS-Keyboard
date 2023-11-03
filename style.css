@@ -1,37 +1,53 @@
 :root {
-    --background-color: #f0f0f0;
-    --border-color: #525252;
-    --text-color: #f0f0f0;
-
-    --key-border-color: #000000;
-    --key-text-color: #e3e3e3;
     --key-height: 3.75rem;
     --key-width: 3.75rem;
-    --key-border-width: 0.2rem;
+    --key-border-width: 0.1rem;
+    --middle-col-gap: 1.5rem;
+    --fn-keys-gap-below: 1rem;
 
-    --middle-col-gap: 1.5em;
-    --fn-keys-gap-below: 1em;
+    --body-background-color: #dddddd;
+
+    --key-background-color: #c5c5c5;
+    --key-border-color: var(--keyboard-under-key-color);
+    --key-hover-background-color: #8b8b8b;
+    --key-hover-text-color: var(--key-text-color);
+    --key-hover-border-color: var(--key-border-color);
+    --key-shadow-color: rgb(0 0 0 / 54%);
+    --key-text-color: #454545;
+
+    --keyboard-under-key-color: #4f4f4f;
+    --keyboard-under-key-radius: 0.5rem;
+    --keyboard-background-color: #a1a1a1;
+    --keyboard-border-color: #757575;
+    --keyboard-outer-color: #636363;
+
+    
 }
   
 @media (prefers-color-scheme: dark) {
     :root {
         /* Dark mode stuff here! */
-        --background-color: #242424;
-        --border-color: #444444;
+        --body-background-color: #333333;
 
-        --key-border-color: #1a1717;
+        --key-background-color: #242424;
+        --key-border-color: var(--keyboard-under-key-color);
+        --key-hover-background-color: #8b8b8b;
+        --key-hover-text-color: var(--key-text-color);
+        --key-hover-border-color: var(--key-border-color);
+        --key-shadow-color: rgb(0 0 0 / 43%);
         --key-text-color: #e3e3e3;
+
+        --keyboard-under-key-color: #1a1a1a;
+        --keyboard-under-key-radius: 0.5rem;
+        --keyboard-background-color: #242424;
+        --keyboard-border-color: #353535;
+        --keyboard-outer-color: var(--key-background-color);
     }
 }
 
 body {
-    background-color: var(--background-color);
-    color: var(--text-color);
-}
-
-main {
-    background-color: var(--background-color);
-    padding: 1rem;
+    background-color: var(--body-background-color);
+    transition-duration: 0.4s;
 }
 
 .key {
@@ -39,7 +55,8 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 0.6rem;
+    padding-bottom: 0.7rem;
+    border-radius: 0.7rem;
     border-style: solid;
     border-width: var(--key-border-width);
     border-color: var(--key-border-color);
@@ -47,8 +64,18 @@ main {
     width: var(--key-width);
     box-sizing: border-box;
     font-family: 'Rubik', sans-serif;
-    box-shadow: inset 0px -3px 0px 3px rgb(255 255 255 / 10%);
-    color: #e3e3e3;
+    box-shadow: inset 0 -0.313rem 0 0.313rem var(--key-shadow-color);
+    color: var(--key-text-color);
+    background-color: var(--key-background-color);
+    cursor: pointer;
+    transition-duration: 0.1s;
+    font-size: 0.9rem
+}
+
+.key:hover {
+    background-color: var(--key-hover-background-color);
+    border-color: var(--key-hover-border-color);
+    color: var(--key-hover-text-color);
 }
 
 .key.key--1-25-wide {
@@ -83,17 +110,25 @@ main {
     height: calc(var(--key-height) * 2);
 }
 
+.key.key--small-font {
+    font-size: 0.75rem;
+}
+
 .keyboard-container {
     display: flex;
     justify-content: center;
+    align-items: center;
+    height: 100%;
 }
 
 .keyboard {
-    background-color: var(--background-color);
-    border-color: var(--border-color);
+    background-color: var(--keyboard-background-color);
+    border-color: var(--keyboard-border-color);
+    box-shadow: 0 0.375rem 0 0.313rem var(--keyboard-outer-color), 0 0.188rem 1.188rem 0.063rem #000000;
     border-radius: 0.5rem;
     border-style: solid;
-    border-width: 0.5rem;
+    border-width: 0.3rem;
+    padding: 0.3rem;
 
     display: grid;
     grid-template-rows:
@@ -122,21 +157,29 @@ main {
 
 .fn-keys .fn-esc-group {
     grid-column-start: fn-esc-group;
+    background-color: var(--keyboard-under-key-color);
+    border-radius: var(--keyboard-under-key-radius);
 }
 
 .fn-keys .fn-f1-group {
     grid-column-start: fn-f1-group;
     display: flex;
+    background-color: var(--keyboard-under-key-color);
+    border-radius: var(--keyboard-under-key-radius);
 }
 
 .fn-keys .fn-f5-group {
     grid-column-start: fn-f5-group;
     display: flex;
+    background-color: var(--keyboard-under-key-color);
+    border-radius: var(--keyboard-under-key-radius);
 }
 
 .fn-keys .fn-f9-group {
     grid-column-start: fn-f9-group;
     display: flex;
+    background-color: var(--keyboard-under-key-color);
+    border-radius: var(--keyboard-under-key-radius);
 }
 
 .middle-col-keys {
@@ -154,6 +197,8 @@ main {
 .middle-col-keys .control-keys {
     grid-row-start: control-keys;
     display: flex;
+    background-color: var(--keyboard-under-key-color);
+    border-radius: var(--keyboard-under-key-radius);
 }
 
 .middle-col-keys .nav-keys {
@@ -161,6 +206,8 @@ main {
     display: grid;
     grid-template-rows: repeat(2, var(--key-height));
     grid-template-columns: calc(var(--key-width) * 3);
+    background-color: var(--keyboard-under-key-color);
+    border-radius: var(--keyboard-under-key-radius);
 }
 
 .middle-col-keys .arrow-keys {
@@ -178,6 +225,8 @@ main {
     display: grid;
     grid-template-rows: repeat(5, var(--key-height));
     grid-template-columns: calc(var(--key-width) * 15);
+    background-color: var(--keyboard-under-key-color);
+    border-radius: var(--keyboard-under-key-radius);
 }
 
 .keys-row {
@@ -186,12 +235,17 @@ main {
 
 .up-arrow-row {
     grid-column-start: up-arrow-col;
+    background-color: var(--keyboard-under-key-color);
+    border-top-left-radius: var(--keyboard-under-key-radius);
+    border-top-right-radius: var(--keyboard-under-key-radius);
 }
 
 .down-arrow-row {
     display: flex;
     grid-row-start: 2;
     grid-column: 1 / 4;
+    background-color: var(--keyboard-under-key-color);
+    border-radius: var(--keyboard-under-key-radius);
 }
 
 .numpad {
@@ -212,6 +266,9 @@ main {
     grid-column: numpad__main-col / span 2;
     display: flex;
     width: 100%;
+    background-color: var(--keyboard-under-key-color);
+    border-top-left-radius: var(--keyboard-under-key-radius);
+    border-top-right-radius: var(--keyboard-under-key-radius);
 }
 
 .numpad .numpad__main {
@@ -219,9 +276,13 @@ main {
     display: grid;
     grid-template-rows: repeat(2, var(--key-height));
     grid-template-columns: calc(var(--key-width) * 3);
+    background-color: var(--keyboard-under-key-color);
+    border-bottom-left-radius: var(--keyboard-under-key-radius);
 }
 
 .numpad .numpad__side {
     grid-row-start: numpad__main;
     grid-column-start: numpad__side;
+    background-color: var(--keyboard-under-key-color);
+    border-bottom-right-radius: var(--keyboard-under-key-radius);
 }
