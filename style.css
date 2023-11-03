@@ -20,13 +20,10 @@
     --keyboard-background-color: #a1a1a1;
     --keyboard-border-color: #757575;
     --keyboard-outer-color: #636363;
-
-    
 }
-  
+
 @media (prefers-color-scheme: dark) {
     :root {
-        /* Dark mode stuff here! */
         --body-background-color: #333333;
 
         --key-background-color: #242424;
@@ -55,7 +52,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-bottom: 0.7rem;
+    padding-bottom: 0.5rem;
     border-radius: 0.7rem;
     border-style: solid;
     border-width: var(--key-border-width);
@@ -77,6 +74,10 @@ body {
     border-color: var(--key-hover-border-color);
     color: var(--key-hover-text-color);
 }
+
+/* .key:active {
+    transform: translateY(4px);
+} */
 
 .key.key--1-25-wide {
     width: calc(var(--key-width) * 1.25);
@@ -112,6 +113,10 @@ body {
 
 .key.key--small-font {
     font-size: 0.75rem;
+}
+
+.key .material-symbols-outlined {
+    font-size: 1.2rem;
 }
 
 .keyboard-container {
