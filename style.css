@@ -39,6 +39,10 @@
         --keyboard-background-color: #242424;
         --keyboard-border-color: #353535;
         --keyboard-outer-color: var(--key-background-color);
+
+        --light-background-color: #345341;
+        --light-lit-background-color: #08a54c;
+        --light-lit-box-shadow-color: #008F43;
     }
 }
 
@@ -48,15 +52,18 @@
     font-family: 'Rubik';
     font-style: normal;
     font-weight: 400;
-    src: url('./dist/fonts/rubik-v28-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+    src: local(''),
+    url('./dist/fonts/rubik-v28-latin-regular.woff2') format('woff2');
 }
 
+/* material-symbols-outlined-300 */
 @font-face {
     font-display: block;
     font-family: 'Material Symbols Outlined';
     font-style: normal;
     font-weight: 300;
-    src: url("./dist/fonts/material-symbols-outlined-v146-latin-300.woff2") format('woff2');
+    src: local(''),
+    url("./dist/fonts/material-symbols-outlined-v146-latin-300.woff2") format('woff2');
 }
 
 .material-symbols-outlined {
@@ -99,7 +106,8 @@ body {
     background-color: var(--key-background-color);
     cursor: pointer;
     transition-duration: 0.1s;
-    font-size: 0.9rem
+    font-size: 0.9rem;
+    /* text-shadow: 0px 0px 9px rgba(255, 255, 255, 1); Key backlight effect */
 }
 
 .key:hover {
@@ -108,6 +116,7 @@ body {
     color: var(--key-hover-text-color);
 }
 
+/* Key presses, need to work out Z index to get this to work */
 /* .key:active {
     transform: translateY(4px);
 } */
@@ -150,6 +159,13 @@ body {
 
 .key .material-symbols-outlined {
     font-size: 1.2rem;
+}
+
+.key.key--round {
+    border-radius: 50%;
+    box-shadow: inset 0 -0.113rem 0 0.213rem var(--key-shadow-color);
+    height: calc(var(--key-height) * 4/5);
+    width: calc(var(--key-width) * 4/5);
 }
 
 .keyboard-container {
@@ -290,7 +306,7 @@ body {
     grid-column-start: numpad-column;
     display: grid;
     grid-template-rows: 
-        var(--key-height)
+        [numpad__lights]var(--key-height)
         var(--fn-keys-gap-below)
         [numpad__top] var(--key-height)
         [numpad__main] calc(var(--key-height) * 4);
@@ -323,4 +339,26 @@ body {
     grid-column-start: numpad__side;
     background-color: var(--keyboard-under-key-color);
     border-bottom-right-radius: var(--keyboard-under-key-radius);
+}
+
+.numpad .numpad__lights {
+    grid-row-start: numpad__lights;
+    grid-column: numpad__main-col / span 2;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-top: calc(var(--key-height) * 1/12);
+}
+
+.light {
+    height: 1.25rem;
+    width: 0.625rem;
+    margin: 0 0.625rem 0 0.625rem;
+    border-radius: 2px;
+    background-color: var(--light-background-color);
+}
+
+.light.lit {
+    background-color: var(--light-lit-background-color);
+    box-shadow: 0px 0px 12px 2px var(--light-lit-box-shadow-color);
 }
