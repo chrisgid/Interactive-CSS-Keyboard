@@ -39,6 +39,16 @@
 
     const f5 = document.getElementById('f5');
     f5.addEventListener('click', function() {
-        location.reload()
+        location.reload();
+    });
+
+    const darkLightToggle = document.getElementById('dark-light-toggle');
+    darkLightToggle.addEventListener('click', function() {
+        const htmlElement = document.querySelector('html');
+        if (htmlElement.dataset.theme === 'dark') {
+            htmlElement.dataset.theme = 'light';
+        } else {
+            htmlElement.dataset.theme = 'dark';
+        }
     });
 })();
