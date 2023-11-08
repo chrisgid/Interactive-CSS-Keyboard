@@ -1,4 +1,4 @@
-# cs2-buy-binds
+# Interactive CSS Keyboard
 
 ## Fonts
 
