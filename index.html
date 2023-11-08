@@ -20,7 +20,7 @@
                         <button class="key">F4</button>
                     </div>
                     <div class="fn-f5-group">
-                        <button class="key">F5</button>
+                        <button class="key" id="f5">F5</button>
                         <button class="key">F6</button>
                         <button class="key">F7</button>
                         <button class="key">F8</button>
@@ -28,7 +28,7 @@
                     <div class="fn-f9-group">
                         <button class="key">F9</button>
                         <button class="key">F10</button>
-                        <button class="key">F11</button>
+                        <button class="key" id="f11">F11</button>
                         <button class="key">F12</button>
                     </div>
                 </div>
@@ -66,7 +66,7 @@
                         <button class="key key--1-5-wide">\</button>
                     </div>
                     <div class="keys-row">
-                        <button class="key key--1-75-wide">Caps</button>
+                        <button class="key key--1-75-wide" id="caps-lock">Caps</button>
                         <button class="key">A</button>
                         <button class="key">S</button>
                         <button class="key">D</button>
@@ -98,7 +98,7 @@
                         <button class="key key--1-25-wide">Ctrl</button>
                         <button class="key key--1-25-wide"><span class="material-symbols-outlined">window</span></button>
                         <button class="key key--1-25-wide">Alt</button>
-                        <button class="key key--6-25-wide">——</button>
+                        <button class="key key--6-25-wide">—</button>
                         <button class="key key--1-25-wide">Alt</button>
                         <button class="key key--1-25-wide"><span class="material-symbols-outlined">window</span></button>
                         <button class="key key--1-25-wide"><span class="material-symbols-outlined">menu</span></button>
@@ -108,7 +108,7 @@
                 <div class="middle-col-keys">
                     <div class="control-keys">
                         <button class="key key--small-font">Print Screen</button>
-                        <button class="key key--small-font">Scroll Lock</button>
+                        <button class="key key--small-font" id="scroll-lock">Scroll Lock</button>
                         <button class="key key--small-font">Pause Break</button>
                     </div>
                     <div class="nav-keys">
@@ -136,14 +136,23 @@
                 </div>
                 <div class="numpad">
                     <div class="numpad__lights">
-                        <div class="light"></div>
-                        <div class="light lit"></div>
-                        <div class="light"></div>
+                        <div class="light" id="num-lock-light">
+                            <div class="light__led"></div>
+                            <div class="light__label"><span class="material-symbols-outlined">looks_one</span></div>
+                        </div>
+                        <div class="light" id="caps-lock-light">
+                            <div class="light__led"></div>
+                            <div class="light__label"><span class="material-symbols-outlined">shift_lock</span></div>
+                        </div>
+                        <div class="light" id="scroll-lock-light">
+                            <div class="light__led"></div>
+                            <div class="light__label"><span class="material-symbols-outlined">expand</span></div>
+                        </div>
                         <div class="key key--round"></div>
                         <div class="key key--round"></div>
                     </div>
                     <div class="numpad__top">
-                        <button class="key key--small-font">Num Lock</button>
+                        <button class="key key--small-font" id="num-lock">Num Lock</button>
                         <button class="key">/</button>
                         <button class="key">*</button>
                         <button class="key">-</button>
@@ -176,5 +185,6 @@
                 </div>
             </div>
         </div>
+        <script src="scripts.js"></script>
     </body>
 </html>
