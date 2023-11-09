@@ -100,7 +100,7 @@
     font-style: normal;
     font-weight: 400;
     src: local(''),
-    url('./dist/fonts/rubik-v28-latin-regular.woff2') format('woff2');
+    url('./fonts/rubik-v28-latin-regular.woff2') format('woff2');
 }
 
 /* material-symbols-outlined-300 */
@@ -110,7 +110,7 @@
     font-style: normal;
     font-weight: 300;
     src: local(''),
-    url("./dist/fonts/material-symbols-outlined-v146-latin-300.woff2") format('woff2');
+    url("./fonts/material-symbols-outlined-v146-latin-300.woff2") format('woff2');
 }
 
 .material-symbols-outlined {
