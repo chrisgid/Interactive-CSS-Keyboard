@@ -4,6 +4,17 @@
     --key-border-width: 0.1rem;
     --middle-col-gap: 1.5rem;
     --fn-keys-gap-below: 1rem;
+    --keyboard-padding: 0.3rem;
+
+    --z-index-key-row1: 100;
+    --z-index-key-row2: 200;
+    --z-index-key-row3: 300;
+    --z-index-key-row4: 400;
+    --z-index-key-row5: 500;
+    --z-index-key-row6: 600;
+    --z-index-keyboard-background: 700;
+
+    font-size: 4px;
 }
 
 [data-theme="light"] {
@@ -50,6 +61,36 @@
     --light-lit-background-color: #08a54c;
     --light-lit-box-shadow-color: #008F43;
     --light-lit-box-shadow: 0px 0px 0.75rem 0.125rem var(--light-lit-box-shadow-color);
+}
+
+@media (min-width: 640px) {
+    :root {
+        font-size: 7px;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    :root {
+        font-size: 8px;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    :root {
+        font-size: 11px;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    :root {
+        font-size: 14px;
+    }
+}
+
+@media screen and (min-width: 1536px) {
+    :root {
+        font-size: 16px;
+    }
 }
 
 /* rubik-regular - latin */
@@ -120,16 +161,15 @@ body {
     outline: none;
 }
 
-.key:hover {
+/* .key:hover {
     background-color: var(--key-hover-background-color);
     border-color: var(--key-hover-border-color);
     color: var(--key-hover-text-color);
-}
-
-/* Key presses, need to work out Z index to get this to work */
-/* .key:active {
-    transform: translateY(4px);
 } */
+
+.key:active {
+    transform: translateY(4px);
+}
 
 .key.key--1-25-wide {
     width: calc(var(--key-width) * 1.25);
@@ -179,6 +219,16 @@ body {
     padding-top: 0.3rem;
 }
 
+.key--round svg {
+    color: var(--key-text-color);
+    width: calc(var(--key-height) * 2/5);
+    height: auto;
+}
+
+.key--round:active {
+    transform: none;
+}
+
 .key.key--round .material-symbols-outlined {
     font-size: 1.3rem;
 }
@@ -197,33 +247,46 @@ body {
     border-radius: 0.5rem;
     border-style: solid;
     border-width: 0.3rem;
-    padding: 0.3rem;
+    padding: var(--keyboard-padding) var(--keyboard-padding) 0 var(--keyboard-padding);
     -webkit-user-select: none;
     user-select: none;
 
     display: grid;
     grid-template-rows:
         [top-row] var(--key-height)
-        [main-row] calc(var(--key-height) * 5);
+        var(--fn-keys-gap-below)
+        [main-row] calc(var(--key-height) * 5)
+        [bottom-gap] var(--keyboard-padding);
     grid-template-columns: 
         [main-column] calc(var(--key-width) * 15) /* 15 keys wide (13 + 1 double wide) */
         [middle-column] calc(var(--key-width) * 3)
         [numpad-column] calc(var(--key-width) * 4);
     grid-column-gap: var(--middle-col-gap);
-    grid-row-gap: var(--fn-keys-gap-below);
+}
+
+.keyboard-bottom-gap {
+    grid-row-start: bottom-gap;
+    grid-column: 1 / -1;
+    width: 100%;
+    height: 100%;
+    background-color: var(--keyboard-background-color);
+    z-index: var(--z-index-keyboard-background);
 }
 
 .fn-keys {
     grid-row-start: top-row;
     grid-column-start: main-column;
     display: grid;
-    grid-template-rows: var(--key-height);
+    grid-template-rows: 
+        var(--key-height)
+        [fn-main-gap] calc(var(--fn-keys-gap-below));
     grid-template-columns: 
         [fn-esc-group] calc(var(--key-width) * 1)
         [fn-f1-group] calc(var(--key-width) * 4)
         [fn-f5-group] calc(var(--key-width) * 4)
         [fn-f9-group] calc(var(--key-width) * 4);
     grid-column-gap: calc(var(--key-width) * (2/3)); /* Gap between function key groups should be 2/3rds of a key's width */
+    z-index: var(--z-index-key-row1);
 }
 
 .fn-keys .fn-esc-group {
@@ -253,6 +316,15 @@ body {
     border-radius: var(--keyboard-under-key-radius);
 }
 
+.fn-keys .fn-main-gap {
+    grid-column: 1/-1;
+    grid-row-start: fn-main-gap;
+    width: 100%;
+    height: 100%;
+    background-color: var(--keyboard-background-color);
+    z-index: var(--z-index-keyboard-background);
+}
+
 .middle-col-keys {
     grid-column-start: middle-column;
     display: grid;
@@ -270,6 +342,15 @@ body {
     display: flex;
     background-color: var(--keyboard-under-key-color);
     border-radius: var(--keyboard-under-key-radius);
+    z-index: var(--z-index-key-row1);
+}
+
+.middle-col-keys .control-nav-gap {
+    grid-row-start: control-nav-gap;
+    width: 100%;
+    height: 100%;
+    background-color: var(--keyboard-background-color);
+    z-index: var(--z-index-keyboard-background);
 }
 
 .middle-col-keys .nav-keys {
@@ -279,6 +360,14 @@ body {
     grid-template-columns: calc(var(--key-width) * 3);
     background-color: var(--keyboard-under-key-color);
     border-radius: var(--keyboard-under-key-radius);
+}
+
+.middle-col-keys .nav-arrow-gap {
+    grid-row-start: nav-arrow-gap;
+    width: 100%;
+    height: 100%;
+    background-color: var(--keyboard-background-color);
+    z-index: var(--z-index-keyboard-background);
 }
 
 .middle-col-keys .arrow-keys {
@@ -302,6 +391,32 @@ body {
 
 .keys-row {
     display: flex;
+    position: relative;
+}
+
+.keys-row.keys-row--2
+{
+    z-index: var(--z-index-key-row2);
+}
+
+.keys-row.keys-row--3
+{
+    z-index: var(--z-index-key-row3);
+}
+
+.keys-row.keys-row--4
+{
+    z-index: var(--z-index-key-row4);
+}
+
+.keys-row.keys-row--5
+{
+    z-index: var(--z-index-key-row5);
+}
+
+.keys-row.keys-row--6
+{
+    z-index: var(--z-index-key-row6);
 }
 
 .up-arrow-row {
@@ -309,14 +424,16 @@ body {
     background-color: var(--keyboard-under-key-color);
     border-top-left-radius: var(--keyboard-under-key-radius);
     border-top-right-radius: var(--keyboard-under-key-radius);
+    z-index: var(--z-index-key-row5);
 }
 
 .down-arrow-row {
     display: flex;
     grid-row-start: 2;
-    grid-column: 1 / 4;
+    grid-column: 1 / -1;
     background-color: var(--keyboard-under-key-color);
     border-radius: var(--keyboard-under-key-radius);
+    z-index: var(--z-index-key-row6);
 }
 
 .numpad {
@@ -334,7 +451,7 @@ body {
 
 .numpad .numpad__top {
     grid-row-start: numpad__top;
-    grid-column: numpad__main-col / span 2;
+    grid-column: 1 / -1;
     display: flex;
     width: 100%;
     background-color: var(--keyboard-under-key-color);
@@ -360,7 +477,7 @@ body {
 
 .numpad .numpad__lights {
     grid-row-start: numpad__lights;
-    grid-column: numpad__main-col / span 2;
+    grid-column: 1 / -1;
     display: flex;
     justify-content: space-around;
     align-items: center;
