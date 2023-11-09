@@ -1,5 +1,9 @@
 # Interactive CSS Keyboard
 
+[View this project here](https://chrisgid.github.io/Interactive-CSS-Keyboard/)
+
+![Screenshot of keyboard](/screenshot.png)
+
 ## Fonts
 
 Fonts from: https://gwfh.mranftl.com/fonts/
